@@ -5,7 +5,7 @@
     "name": "Mail Attach Existing Attachment",
     "summary": "Adding attachment on the object by sending this one",
     "author": "ACSONE SA/NV, Tecnativa, Odoo Community Association (OCA)",
-    "website": "https://github.com/OCA/social",
+    "website": "https://github.com/OCA/mail",
     "category": "Social Network",
     "version": "17.0.1.0.0",
     "license": "AGPL-3",
