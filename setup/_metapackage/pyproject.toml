@@ -1,7 +1,8 @@
 [project]
 name = "odoo-addons-oca-mail"
-version = "18.0.20250219.0"
+version = "18.0.20250320.0"
 dependencies = [
+    "odoo-addon-mail_autosubscribe==18.0.*",
     "odoo-addon-mail_debrand==18.0.*",
     "odoo-addon-mail_inline_css==18.0.*",
     "odoo-addon-mail_layout_preview==18.0.*",
