@@ -26,22 +26,8 @@
 
     <!-- CALENDAR VIEW
         Add a link to the related model instance to ease navigation
+        TODO: add the mail_activity_board.mail_activity_view_calendar, when it will be fixed
     -->
-    <record id="mail_activity_view_calendar" model="ir.ui.view">
-        <field
-            name="name"
-        >mail.activity.view.form.calendar (in mail_activity_board)</field>
-        <field name="model">mail.activity</field>
-        <field name="inherit_id" ref="mail.mail_activity_view_calendar" />
-        <field name="arch" type="xml">
-            <field name="res_name" position="before">
-                <field name="related_model_instance" />
-            </field>
-            <field name="res_name" position="attributes">
-                <attribute name="invisible">1</attribute>
-            </field>
-        </field>
-    </record>
 
     <!-- FORM VIEW -->
     <record id="mail_activity_view_form_board" model="ir.ui.view">
@@ -59,7 +45,7 @@
                     >
                         <field name="res_name" invisible="1" />
                         <h1>
-                            <field name="related_model_instance" />
+                            <field name="related_model_instance" options="{'no_open': True}"/>
                         </h1>
                     </button>
                     <field name="activity_category" invisible="1" />
@@ -109,13 +95,13 @@
         </field>
     </record>
 
-    <!-- TREE VIEW -->
+    <!-- LIST VIEW -->
     <record id="mail_activity_view_tree" model="ir.ui.view">
-        <field name="name">mail.activity.boards.view.tree</field>
+        <field name="name">mail.activity.boards.view.list</field>
         <field name="model">mail.activity</field>
         <field name="inherit_id" ref="mail.mail_activity_view_tree" />
         <field name="arch" type="xml">
-            <xpath expr="//tree" position="attributes">
+            <xpath expr="//list" position="attributes">
                 <attribute name="default_order" />
                 <attribute
                     name="decoration-danger"
@@ -131,7 +117,7 @@
                 <field name="related_model_instance" />
             </field>
             <field name="res_name" position="attributes">
-                <attribute name="invisible">1</attribute>
+                <attribute name="column_invisible">1</attribute>
             </field>
         </field>
     </record>
@@ -162,7 +148,7 @@
                 <field name="activity_type_id" />
                 <field name="activity_category" />
                 <templates>
-                    <t t-name="kanban-box">
+                    <t t-name="card">
                         <div t-attf-class="oe_kanban_content oe_kanban_global_click">
                             <div class="oe_kanban_content">
                                 <div>
@@ -221,13 +207,9 @@
                                         </t>
                                     </div>
                                     <div class="oe_kanban_bottom_right">
-                                        <img
-                                            t-att-src="kanban_image('res.users', 'avatar_128', record.user_id.raw_value)"
-                                            t-att-title="record.user_id.value"
-                                            t-att-alt="record.user_id.value"
-                                            width="24"
-                                            height="24"
-                                            class="oe_kanban_avatar"
+                                        <field
+                                            name="user_id"
+                                            widget="many2one_avatar_user"
                                         />
                                     </div>
                                 </div>
@@ -252,7 +234,7 @@
                 <field name="res_name" string="Origin" />
             </xpath>
 
-            <xpath expr='//filter[@name="activities_overdue"]' position='before'>
+            <xpath expr='//filter[@name="filter_date_deadline_past"]' position='before'>
                 <filter
                     string="Act. next month"
                     name="activities_month"
@@ -296,7 +278,7 @@
             name="view_ids"
             eval="[(5, 0, 0),
                           (0, 0, {'view_mode': 'kanban', 'view_id': ref('mail_activity_view_kanban')}),
-                          (0, 0, {'view_mode': 'tree', 'view_id': ref('mail_activity_view_tree')}),
+                          (0, 0, {'view_mode': 'list', 'view_id': ref('mail_activity_view_tree')}),
                           (0, 0, {'view_mode': 'form', 'view_id': ref('mail_activity_view_form_board')}),
                           (0, 0, {'view_mode': 'calendar'}),
                           (0, 0, {'view_mode': 'pivot'}),
