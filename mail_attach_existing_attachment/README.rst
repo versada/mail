@@ -92,7 +92,6 @@ Contributors
 - `360ERP <https://www.360erp.com>`__:
 
   - Andrea Stirpe
-  - Ugnė Sinkevičienė ugne@versada.eu
 
 Maintainers
 -----------
